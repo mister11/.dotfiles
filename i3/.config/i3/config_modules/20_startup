@@ -1,0 +1,11 @@
+exec --no-startup-id start-pulseaudio-x11
+exec --no-startup-id feh --randomize --bg-fill ~/Pictures/wallpapers
+exec --no-startup-id xset r rate 350 50
+exec --no-startup-id xset m 20/10 5
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id CM_DIR=/home/mister11/.config/clipmenu clipmenud
+exec --no-startup-id megasync
+exec --no-startup-id blueman-tray
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy-rapid 10 pixel
+exec --no-startup-id setxkbmap -option caps:swapescape

@@ -1,0 +1,9 @@
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [class="Pavucontrol"] floating enable
+
+# custom
+for_window[class="jetbrains-idea-ce"] layout tabbed
+for_window[class="code"] layout tabbed
+for_window[class="Code"] layout tabbed

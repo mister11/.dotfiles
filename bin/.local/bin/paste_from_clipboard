@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+CM_DIR=/home/mister11/.config/clipmenu CM_LAUNCHER=rofi clipmenu
+
+active_window_id=$(xdotool getactivewindow)
+window_name=$(xdotool getwindowclassname "$active_window_id")
+
+if [ "$window_name" == "kitty" ]; then
+  xdotool key ctrl+shift+v 
+else
+  xdotool key ctrl+v
+fi

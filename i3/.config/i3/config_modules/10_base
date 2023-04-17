@@ -1,0 +1,18 @@
+# set Win/Meta key as mod
+set $mod Mod4
+
+# font, same as status bar
+font pango:Fira Code 10
+
+# mouse
+focus_follows_mouse no
+floating_modifier $mod
+
+# border
+default_border pixel 1
+default_floating_border pixel 1
+hide_edge_borders none
+smart_borders on
+smart_gaps on
+gaps outer 2
+gaps inner 2

@@ -1,0 +1,5 @@
+lock,i3lock-fancy-rapid 10 pixel
+suspend,systemctl suspend
+logout,i3-msg exit
+reboot,systemctl reboot
+shutdown,systemctl poweroff

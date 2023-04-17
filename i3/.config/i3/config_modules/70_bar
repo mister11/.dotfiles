@@ -1,0 +1,5 @@
+bar {
+	status_command py3status
+	tray_output primary
+    bindsym button1 nop
+}

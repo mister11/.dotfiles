@@ -1,0 +1,46 @@
+general {
+        colors = true
+        interval = 1
+        color_good = '#66ff66'
+        color_bad = '#f00060'
+        color_degraded = '#f9fd80'
+}
+
+order += "volume_status out"
+order += "volume_status in"
+order += "arch_updates"
+order += "sysdata"
+order += "clock"
+
+volume_status out {
+    cache_timeout = 1
+    max_volume = 100
+    format = "VOL:{percentage}"
+    format_muted = "VOL:muted"
+    button_mute = 3
+    on_click 1 = "exec pavucontrol -t 3"
+}
+
+volume_status in {
+    max_volume = 100
+    is_input = true
+    format = "MIC:{percentage}"
+    format_muted = "MIC:muted"
+    button_mute = 3
+    on_click 1 = "exec pavucontrol -t 4"
+}
+
+arch_updates {
+    format = "\?if=total=0 0|{aur}+{pacman}"
+}
+
+sysdata {
+    cache_timeout = 3
+    format = "[\?color=cpu_used_percent CPU: {cpu_used_percent}%], [\?color=mem_used_percent RAM: {mem_used} {mem_total_unit}[\?if=!swap_used=0  ({swap_used} {swap_used_unit})]]"
+}
+
+clock {
+    on_click 1 = "exec gsimplecal"
+    format = "{Europe/Zagreb}"
+    format_time = "%a, %d %b %Y %H:%M:%S"
+}
