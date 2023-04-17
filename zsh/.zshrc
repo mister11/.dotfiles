@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/mister11/.oh-my-zsh
 
+# setup private stuff
+source ~/.personal/zsh
+
 ZSH_THEME="dpoggi"
 ENABLE_CORRECTION="true"
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -39,4 +42,3 @@ bindkey -s '^f' 'tmux-sessionizer\n'
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /opt/asdf-vm/asdf.sh
-
