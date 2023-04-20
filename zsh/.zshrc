@@ -26,12 +26,7 @@ unsetopt correct_all
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-eval $(thefuck --alias)
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/mister11/.sdkman"
-[[ -s "/home/mister11/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mister11/.sdkman/bin/sdkman-init.sh"
-eval "$(zoxide init zsh)"
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
