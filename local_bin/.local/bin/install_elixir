@@ -1,19 +1,10 @@
 #!/usr/bin/env bash
 
-# this is needed for Ansible install script
-# at the time this script is executed, .zshrc is not sourced and asdf is not available
-# Ansible tasks already use full asdf path that we can then just pass in here as an argument
-if [ -z "$1" ]; then
-  asdf_bin="asdf"
-else
-  asdf_bin="$1"
-fi
-
 latest_tag_sha=$(curl -s https://api.github.com/repos/elixir-lang/elixir/tags \
   | jq ".[0].commit.sha" \
   | tr -d '"')
 
-"${asdf_bin}" install elixir "ref:$latest_tag_sha"
-"${asdf_bin}" global elixir "ref:$latest_tag_sha"
+asdf install elixir "ref:$latest_tag_sha"
+asdf global elixir "ref:$latest_tag_sha"
 
-"${asdf_bin}" reshim elixir
+asdf reshim elixir
