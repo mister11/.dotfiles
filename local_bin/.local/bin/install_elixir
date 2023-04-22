@@ -14,5 +14,6 @@ latest_tag_sha=$(curl -s https://api.github.com/repos/elixir-lang/elixir/tags \
   | tr -d '"')
 
 "${asdf_bin}" install elixir "ref:$latest_tag_sha"
+"${asdf_bin}" global elixir "ref:$latest_tag_sha"
 
 "${asdf_bin}" reshim elixir
