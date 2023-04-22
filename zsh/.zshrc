@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/mister11/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # setup private stuff
 source ~/.personal/zsh
@@ -34,6 +34,5 @@ complete -o nospace -C /usr/bin/terraform terraform
 # shortcuts
 bindkey -s '^f' 'tmux-sessionizer\n' 
 
-source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /opt/asdf-vm/asdf.sh
