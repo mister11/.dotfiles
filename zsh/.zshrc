@@ -7,7 +7,7 @@ source ~/.personal/zsh
 ZSH_THEME="dpoggi"
 ENABLE_CORRECTION="true"
 DISABLE_MAGIC_FUNCTIONS="true"
-plugins=(git gcloud mix golang docker docker-compose zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
+plugins=(git gcloud mix golang docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
