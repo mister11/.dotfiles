@@ -1,1 +1,1 @@
-stow -S local_bin
+find . -maxdepth 1 -mindepth 1 -type d -not -path "*/\.*" -printf "%f\n" | xargs -0 -d "\n" stow -S
