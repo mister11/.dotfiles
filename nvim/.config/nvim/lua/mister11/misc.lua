@@ -1,6 +1,6 @@
 require('lualine').setup({
     options = {
-        theme = 'gruvbox-baby',
+        theme = 'gruvbox',
     },
     sections = {
         lualine_c = {

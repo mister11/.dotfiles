@@ -1,4 +1,6 @@
-vim.g.gruvbox_baby_background_color = "dark"
-local colors = require("gruvbox-baby.colors").config()
-vim.g.gruvbox_baby_highlights = {["@symbol"] = {fg = colors.soft_yellow}}
-vim.cmd([[colorscheme gruvbox-baby]])
+vim.o.background = "dark" -- or "light" for light mode
+require("gruvbox").setup({
+  contrast = "hard", -- can be "hard", "soft" or empty string
+})
+vim.cmd("colorscheme gruvbox")
+
