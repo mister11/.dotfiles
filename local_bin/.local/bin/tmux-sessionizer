@@ -1,56 +1,36 @@
 #!/usr/bin/env bash
 
-new_session() {
-    tmux_running=$(pgrep tmux)
-    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-        tmux new-session -s $selected_name -c $selected
-        exit 0
-    fi
-
-    if ! tmux has-session -t $selected_name 2>/dev/null; then
-        tmux new-session -ds $selected_name -c $selected
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t $selected_name
-    else
-        tmux switch-client -t $selected_name
-    fi
-}
-
-# both this and vsplit functions will not work outside of tmux session, but that's fine
-# if accidentally ran, nothing happens by default
-new_window() {
-    tmux new-window -t football-events -n $selected_name -c $selected
-}
-
-# vsplit as in - i'm gonna get two vertical windows
-new_vsplit() {
-    tmux split-window -h -c $selected
-}
-
 if [[ $# -eq 1 ]]; then
-    selected=$1
+  selected=$1
 else
-    selected=$(find ~/dev -mindepth 1 -maxdepth 1 -type d |
-        fzf --multi --bind "space:execute(echo 'win@'{})+accept" --bind "tab:execute(echo 'vsplit@'{})+accept")
+  selected=$(find ~/dev -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
-    exit 0
+  exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-prefix=$(echo $selected | cut -d@ -f1)
+dirs=$(dirname $selected)
+prev_dir=$(basename $dirs)
+basename=$(basename $selected)
+basename="${basename/./_}"
 
-# with prefix, it's 'prefix_filename filename' (one is execute(echo {}), other one is fzf's output)
-# without, it's just `filename` (only fzf's output)
-# this works for both cases to get selected project directory
-selected=$(echo $selected | cut -d@ -f2- | cut -d ' ' -f1)
-if [[ "win" == $prefix ]]; then
-    new_window
-elif [[ "vsplit" == $prefix ]]; then
-    new_vsplit
+selected_name="${basename}_${prev_dir}"
+
+echo "$selected_name"
+tmux_running=$(pgrep tmux)
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s $selected_name -c $selected
+  exit 0
+fi
+
+# = will make matching exact instead of being a prefix match
+if ! tmux has-session -t=$selected_name 2>/dev/null; then
+  tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+  tmux attach-session -t $selected_name
 else
-    new_session
+  tmux switch-client -t $selected_name
 fi

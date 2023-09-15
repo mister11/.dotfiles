@@ -6,3 +6,4 @@ close_on_unfocus = 0
 mainwindow_keep_above = 1
 mainwindow_resizable = 0
 mainwindow_position = center 
+force_lang=en_GB.utf8

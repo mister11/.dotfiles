@@ -97,9 +97,19 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'buffer' },
+        { name = 'path' },
     },
     formatting = {
         format = lspkind.cmp_format({ with_text = true, maxwidth = 50 })
     }
 }
 require 'luasnip.loaders.from_vscode'.lazy_load()
+
+luasnip = require("luasnip")
+
+luasnip.add_snippets("all", {
+    luasnip.parser.parse_snippet(
+        "eex",
+        "<%= ${1:val} %>"
+    ),
+})

@@ -11,6 +11,11 @@ plugins=(git gcloud mix golang docker docker-compose zsh-autosuggestions zsh-syn
 
 source $ZSH/oh-my-zsh.sh
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+export TERM=xterm-256color
+export EDITOR=nvim
+
 export FLYCTL_INSTALL="/home/mister11/.fly"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.pulumi/bin:$PATH"

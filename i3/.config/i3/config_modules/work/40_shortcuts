@@ -1,0 +1,11 @@
+bindsym $mod+b exec $HOME/.config/rofi/scripts/bookmarks.sh
+bindsym $mod+p exec $HOME/.config/rofi/scripts/github/opener.sh
+
+mode "argo" {
+    bindsym 1 exec $HOME/.config/rofi/scripts/argo/opener-dev.sh; mode "default"
+    bindsym 2 exec $HOME/.config/rofi/scripts/argo/opener-pro.sh; mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+a mode "argo"

@@ -5,5 +5,4 @@ for_window [class="Pavucontrol"] floating enable
 
 # custom
 for_window[class="jetbrains-idea-ce"] layout tabbed
-for_window[class="code"] layout tabbed
-for_window[class="Code"] layout tabbed
+for_window[class="(?i)code"] layout tabbed

@@ -25,4 +25,11 @@ vim.opt.signcolumn = "yes"
 vim.opt.showmode = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
-vim.opt.spelllang = "en"
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+
+vim.cmd [[
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
+]]

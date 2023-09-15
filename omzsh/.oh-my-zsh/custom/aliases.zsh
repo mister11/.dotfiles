@@ -7,9 +7,9 @@ alias py3='python3'
 alias gtfo='git reset --hard HEAD'
 
 # List direcory contents
-alias ls='exa'
-alias l='exa -lah'
-alias ll='exa -lh'
+alias ls='eza'
+alias l='eza -lah'
+alias ll='eza -lh'
 
 # git
 alias gitCleanEnhancementBranches='git branch | egrep "enhancement/.*" | xargs git branch -d'

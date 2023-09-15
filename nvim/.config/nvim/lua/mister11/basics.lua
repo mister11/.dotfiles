@@ -44,11 +44,19 @@ autocmd('TextYankPost', {
     end,
 })
 
+-- work stuff (more or less)
 local filetype_group = augroup("FileTypes", {})
 autocmd({"BufNewFile", "BufRead"}, {
     group = filetype_group,
-    pattern = "*.js.template",
+    pattern = "*.js.eex",
     callback = function ()
         vim.bo.filetype = "javascript"
+    end,
+})
+autocmd({"BufNewFile", "BufRead"}, {
+    group = filetype_group,
+    pattern = "*.env",
+    callback = function ()
+        vim.bo.filetype = "jproperties"
     end,
 })
