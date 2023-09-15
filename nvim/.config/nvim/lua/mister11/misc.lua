@@ -13,3 +13,4 @@ require('lualine').setup({
 })
 require('gitsigns').setup()
 require('nvim-autopairs').setup()
+require('nvim-ts-autotag').setup()

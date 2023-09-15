@@ -72,6 +72,7 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons", opt = true }
     },
     "windwp/nvim-autopairs",
+    "windwp/nvim-ts-autotag",
     "mbbill/undotree",
     "Pocco81/auto-save.nvim",
     "ThePrimeagen/harpoon",

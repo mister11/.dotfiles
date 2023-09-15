@@ -11,13 +11,18 @@ NnoremapGlobal('<leader>eq', vim.diagnostic.setloclist)
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
+        'astro',
         'bashls',
+        'emmet_ls',
         'elixirls',
         'gopls',
         'html',
         'jsonls',
         'lua_ls',
         'rust_analyzer',
+        'svelte',
+        'pyright',
+        'tailwindcss',
         'terraformls',
         'tsserver',
         'yamlls',
@@ -52,6 +57,8 @@ require('mason-lspconfig').setup_handlers({
     end,
     ["gopls"] = function()
         lspconfig.gopls.setup {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
             cmd = { "gopls", "serve" },
             filetypes = { "go", "gomod" },
             settings = {
