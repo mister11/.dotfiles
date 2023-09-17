@@ -1,13 +1,18 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# setup private stuff
-source ~/.personal/zsh
-
 ZSH_THEME="dpoggi"
 ENABLE_CORRECTION="true"
 DISABLE_MAGIC_FUNCTIONS="true"
-plugins=(git gcloud mix golang docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+
+plugins=(git mix golang docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+
+# setup private stuff
+# keep this after plugins as it add home/work specific plugins
+personal_zsh="~/.personal/zsh"
+if [[ -f "$personal_zsh" ]]; then
+   source "$personal_zsh"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -41,3 +46,5 @@ bindkey -s '^f' 'tmux-sessionizer\n'
 
 source /usr/share/fzf/key-bindings.zsh
 source /opt/asdf-vm/asdf.sh
+source $HOME/.local/bin/socli_completions
+source $HOME/.local/bin/flyctl_completions

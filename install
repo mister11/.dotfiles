@@ -1,1 +1,5 @@
+# make sure folder exists so that only files are symlinked
+# this will also enable us to have personal (home/work) bin files symlinked
+mkdir ~/.local/bin
+
 find . -maxdepth 1 -mindepth 1 -type d -not -path "*/\.*" -printf "%f\n" | xargs -0 -d "\n" stow -S
