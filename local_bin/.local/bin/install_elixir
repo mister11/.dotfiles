@@ -5,10 +5,10 @@ latest_tag_name=$(curl -s https://api.github.com/repos/elixir-lang/elixir/tags \
   | tr -d '"')
 
 
-asdf install elixir "ref:$latest_tag_sha"
-asdf global elixir "ref:$latest_tag_sha"
+asdf install elixir "ref:$latest_tag_name"
+asdf global elixir "ref:$latest_tag_name"
 
-rm "$HOME"/.asdf/shims/livebook
+rm -r "$HOME"/.asdf/shims/livebook
 
 mix archive.install hex phx_new
 mix escript.install hex livebook 
