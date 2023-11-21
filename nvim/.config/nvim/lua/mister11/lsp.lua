@@ -70,6 +70,15 @@ require('mason-lspconfig').setup_handlers({
                 },
             },
         }
+    end,
+    ["tailwindcss"] = function()
+        lspconfig.tailwindcss.setup {
+            init_options = {
+                userLanguages = {
+                    heex = "html-eex",
+                },
+            },
+        }
     end
 })
 
