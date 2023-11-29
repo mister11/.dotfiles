@@ -26,7 +26,6 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.pulumi/bin:$PATH"
 export PATH="$HOME/.local/kitty.app/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
@@ -36,6 +35,7 @@ unsetopt correct_all
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+. /opt/asdf-vm/asdf.sh
 . ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U +X bashcompinit && bashcompinit
@@ -45,6 +45,5 @@ complete -o nospace -C /usr/bin/terraform terraform
 bindkey -s '^f' 'tmux-sessionizer\n' 
 
 source /usr/share/fzf/key-bindings.zsh
-source /opt/asdf-vm/asdf.sh
 source $HOME/.local/bin/socli_completions
 source $HOME/.local/bin/flyctl_completions

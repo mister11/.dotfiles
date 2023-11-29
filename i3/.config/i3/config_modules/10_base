@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # font, same as status bar
-font pango:Fira Code 10
+font pango:JetBrainsMono Nerd Font Mono 10
 
 # mouse
 focus_follows_mouse no

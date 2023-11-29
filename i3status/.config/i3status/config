@@ -1,3 +1,7 @@
+###############################################################
+# To enable laptop-related modules, uncomment commented lines #
+###############################################################
+
 general {
         colors = true
         interval = 1
@@ -9,8 +13,10 @@ general {
 order += "volume_status out"
 order += "volume_status in"
 order += "arch_updates"
+# order += "battery_level"
 order += "sysdata"
 order += "clock"
+# order += "do_not_disturb"
 
 volume_status out {
     cache_timeout = 1
@@ -34,6 +40,12 @@ arch_updates {
     format = "\?if=total=0 0|{aur}+{pacman}"
 }
 
+# battery_level { 
+#     format = "PWR:{percent}% ({time_remaining})"
+#     hide_seconds = True
+#     notify_low_level = True
+# }
+
 sysdata {
     cache_timeout = 3
     format = "[\?color=cpu_used_percent CPU: {cpu_used_percent}%], [\?color=mem_used_percent RAM: {mem_used} {mem_total_unit}[\?if=!swap_used=0  ({swap_used} {swap_used_unit})]]"
@@ -44,3 +56,7 @@ clock {
     format = "{Europe/Zagreb}"
     format_time = "%a, %d %b %Y %H:%M:%S"
 }
+
+# do_not_disturb {
+#     format = "[\?color=state&show DND]"
+# }

@@ -1,13 +1,13 @@
-alias ...='cd ../..'
-alias -- -='cd -'
-
 alias ls='eza'
 alias l='eza -lah'
 alias ll='eza -lh'
+alias bat='bat --style=plain --theme=gruvbox-dark'
+alias cat='bat --style=plain --theme=gruvbox-dark'
 
 # git
 alias gbnm="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
 alias gtfo='git reset --hard HEAD'
+alias ghpr='gh pr create -w'
 
 gdfz() {
     if [ -z "$1"]; then
@@ -50,10 +50,14 @@ alias nn='nvim .'
 alias mdg='mix deps.get'
 alias mdu='mix deps.update --all'
 alias mc='mix compile'
+alias mcr='mix credo'
 alias mf='mix format'
 alias mtt='mix test --trace'
+alias mttp='iex -S mix test --trace'
 alias mttt='mix test --trace --only sven'
+alias mtttp='iex -S mix test --trace --only sven'
 alias iexm='iex --no-pry -S mix'
+alias iexmn='iex --no-pry --sname $(basename $(pwd) | tr "-" "_") -S mix'
 alias iexp='iex --no-pry -S mix phx.server'
 alias elsr='rm -rf .elixir_ls'
 alias elsrh='rm -rf deps _build .elixir_ls && mix deps.get'

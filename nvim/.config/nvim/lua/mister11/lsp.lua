@@ -78,6 +78,7 @@ require('mason-lspconfig').setup_handlers({
                     heex = "html-eex",
                 },
             },
+            root_dir = lspconfig.util.root_pattern("mix.exs", ".git")
         }
     end
 })

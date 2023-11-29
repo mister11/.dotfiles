@@ -8,4 +8,12 @@ mode "argo" {
     bindsym Escape mode "default"
 }
 
+mode "grafana" {
+    bindsym 1 exec $HOME/.config/rofi/scripts/grafana/opener-dev.sh; mode "default"
+    bindsym 2 exec $HOME/.config/rofi/scripts/grafana/opener-pro.sh; mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 bindsym $mod+a mode "argo"
+bindsym $mod+g mode "grafana"

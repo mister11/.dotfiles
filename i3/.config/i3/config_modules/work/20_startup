@@ -1,4 +1,3 @@
-exec --no-startup-id xrandr --output eDP1 --mode 1920x1080 --pos 3840x0 --rotate normal --output DP1 --primary --mode 1920x1200 --pos 1920x0 --rotate normal --output DP2 --off --output DP3 --mode 1920x1200 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-exec --no-startup-id /home/mister11/scripts/signify-ssh-watcher.sh
+exec --no-startup-id xrandr --output eDP-1 --mode 3456x2160 --pos 7680x0 --rotate normal --output DP-1 --off --output DP-2 --mode 3840x2160 --pos 0x0 --rotate normal --output DP-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal
 # Testing if this makes any difference; using it only for work so I don't break anything
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

@@ -6,6 +6,7 @@ bindsym $mod+Shift+r restart
 
 # terminal
 bindsym $mod+Return exec kitty
+bindsym $mod+e exec kitty
 
 # audio
 bindsym $mod+F10 exec playerctl previous
@@ -138,9 +139,6 @@ bindsym $mod+r exec "rofi -show run"
 bindsym $mod+equal exec "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $mod+mod1+q exec $HOME/.config/rofi/scripts/power_menu.sh
 bindsym $mod+m exec $HOME/.config/rofi/scripts/display.sh
-bindsym $mod+e exec $HOME/.config/rofi/scripts/edit_menu.sh
-bindsym $mod+mod1+s exec $HOME/.config/rofi/scripts/tmux-session-chooser.sh
-bindsym $mod+mod1+p exec rofi -modi TODO:$HOME/.config/rofi/scripts/todo.sh -show TODO
 
 # lock screen
 bindsym $mod+q exec i3lock-fancy-rapid 10 pixel

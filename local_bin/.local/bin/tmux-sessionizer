@@ -3,7 +3,10 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(find ~/dev -mindepth 1 -maxdepth 1 -type d | fzf)
+  dev_folders=$(find ~/dev -mindepth 1 -maxdepth 1 -type d)
+  all_folders=$(find ~/work -mindepth 2 -maxdepth 2 -type d 2>/dev/null)
+  all_folders+=$dev_folders
+  selected=$(echo "$all_folders" | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -13,11 +16,12 @@ fi
 dirs=$(dirname $selected)
 prev_dir=$(basename $dirs)
 basename=$(basename $selected)
-basename="${basename/./_}"
+basename="${basename//./_}"
 
 selected_name="${basename}_${prev_dir}"
 
 echo "$selected_name"
+
 tmux_running=$(pgrep tmux)
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
   tmux new-session -s $selected_name -c $selected
