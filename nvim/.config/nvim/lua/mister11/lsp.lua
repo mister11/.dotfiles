@@ -13,17 +13,17 @@ require('mason-lspconfig').setup({
     ensure_installed = {
         'astro',
         'bashls',
-        'emmet_ls',
         'elixirls',
+        'emmet_ls',
         'gopls',
         'html',
         'jsonls',
         'lua_ls',
+        'pyright',
         'rust_analyzer',
         'svelte',
-        'pyright',
-        'tailwindcss',
         'terraformls',
+        'tailwindcss',
         'tsserver',
         'yamlls',
     }
@@ -113,6 +113,7 @@ cmp.setup {
         format = lspkind.cmp_format({ with_text = true, maxwidth = 50 })
     }
 }
+
 require 'luasnip.loaders.from_vscode'.lazy_load()
 
 luasnip = require("luasnip")

@@ -1,7 +1,7 @@
 require('mister11.helpers')
 require('mister11.options')
 require('mister11.basics')
-require("mister11.lazy")
+require('mister11.lazy')
 require('mister11.colors')
 require('mister11.telescope')
 require('mister11.lsp')

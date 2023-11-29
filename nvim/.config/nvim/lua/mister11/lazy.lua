@@ -1,5 +1,4 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -13,6 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    -- copilot
+    { "github/copilot.vim" },
+
     -- themes
     { "ellisonleao/gruvbox.nvim", priority = 1000 },
 
@@ -46,7 +48,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate"
     },
-    -- use "nvim-treesitter/nvim-treesitter-textobjects"
+    "nvim-treesitter/nvim-treesitter-textobjects",
 
     -- lsp, snippets, completion
     "williamboman/mason.nvim",
@@ -63,6 +65,10 @@ require("lazy").setup({
 
     "onsails/lspkind-nvim",
     "ray-x/lsp_signature.nvim",
+
+    -- rust
+    'neovim/nvim-lspconfig',
+    'simrat39/rust-tools.nvim',
 
     -- misc
     "florinpatrascu/vscode-elixir-snippets",

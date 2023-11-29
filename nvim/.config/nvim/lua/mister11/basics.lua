@@ -44,7 +44,6 @@ autocmd('TextYankPost', {
     end,
 })
 
--- work stuff (more or less)
 local filetype_group = augroup("FileTypes", {})
 autocmd({"BufNewFile", "BufRead"}, {
     group = filetype_group,

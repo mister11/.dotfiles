@@ -35,6 +35,11 @@ require 'nvim-treesitter.configs'.setup {
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
             },
+            selection_modes = {
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V', -- linewise
+                ['@class.outer'] = '<c-v>', -- blockwise
+            },
         },
         swap = {
             enable = true,
