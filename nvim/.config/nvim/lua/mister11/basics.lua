@@ -1,5 +1,3 @@
-NnoremapGlobal('<leader>u', '<cmd>UndotreeShow<cr>')
-
 -- buffers, local and quickfix list skips
 NnoremapGlobal('gn', '<cmd>bnext<cr>')
 NnoremapGlobal('gp', '<cmd>bprev<cr>')

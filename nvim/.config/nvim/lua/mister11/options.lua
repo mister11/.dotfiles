@@ -4,6 +4,7 @@ vim.g.undotree_SetFocusWhenToggle = 1
 
 vim.opt.termguicolors = true
 vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.opt.completeopt = "menuone,preview"
 vim.opt.relativenumber = true
 vim.opt.showmatch = true
@@ -25,6 +26,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.showmode = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
