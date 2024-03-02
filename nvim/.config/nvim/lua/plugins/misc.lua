@@ -9,8 +9,6 @@ return {
     -- others
     { "windwp/nvim-autopairs",   config = true },
     { "windwp/nvim-ts-autotag",  config = true },
-
-    -- folke :)
     {
         "folke/flash.nvim",
         event = "VeryLazy",
