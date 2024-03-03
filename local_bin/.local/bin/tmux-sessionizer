@@ -3,10 +3,7 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  dev_folders=$(find ~/dev -mindepth 1 -maxdepth 1 -type d)
-  all_folders=$(find ~/work -mindepth 2 -maxdepth 2 -type d 2>/dev/null)
-  all_folders+=$dev_folders
-  selected=$(echo "$all_folders" | fzf)
+  selected=$( (find ~/dev -mindepth 1 -maxdepth 1 -type d; find ~/work -mindepth 2 -maxdepth 2 -type d 2>/dev/null)| fzf )
 fi
 
 if [[ -z $selected ]]; then
