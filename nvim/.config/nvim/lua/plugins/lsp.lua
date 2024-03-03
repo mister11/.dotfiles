@@ -41,7 +41,7 @@ return {
             ensure_installed = {
                 'astro',
                 'bashls',
-                'elixirls',
+                -- 'elixirls',
                 'emmet_ls',
                 'gopls',
                 'html',
@@ -59,6 +59,37 @@ return {
 
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
         local lspconfig = require('lspconfig')
+
+
+        local lsp_configs = require('lspconfig.configs')
+
+
+        local lexical_config = {
+            filetypes = { "elixir", "eelixir", "heex" },
+            cmd = { "/home/mister11/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+            settings = {},
+        }
+
+        if not lsp_configs.lexical then
+            lsp_configs.lexical = {
+                default_config = {
+                    filetypes = lexical_config.filetypes,
+                    cmd = lexical_config.cmd,
+                    root_dir = function(fname)
+                        return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+                    end,
+                    -- optional settings
+                    settings = lexical_config.settings,
+                },
+            }
+        end
+
+        lspconfig.lexical.setup({
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+        })
+
+
         require('mason-lspconfig').setup_handlers({
             function(server_name)
                 lspconfig[server_name].setup({
