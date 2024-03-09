@@ -24,7 +24,7 @@ return {
             Nnoremap('K', vim.lsp.buf.hover)
             Nnoremap('<leader>li', vim.lsp.buf.implementation)
             Nnoremap('<leader>ls', vim.lsp.buf.signature_help)
-            Inoremap('<C-h>', vim.lsp.buf.signature_help)
+            Inoremap('<C-k>', vim.lsp.buf.signature_help)
             Nnoremap('<leader>ltd', vim.lsp.buf.type_definition)
             Nnoremap('<leader>lr', vim.lsp.buf.rename)
             Nnoremap('<leader>la', vim.lsp.buf.code_action)
