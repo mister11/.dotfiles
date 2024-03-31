@@ -1,6 +1,15 @@
 return {
     -- AI
-    { "github/copilot.vim" },
+    {
+        "github/copilot.vim",
+        config = function()
+            vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+                expr = true,
+                replace_keycodes = false
+            })
+            vim.g.copilot_no_tab_map = true
+        end
+    },
 
     -- git
     { "sindrets/diffview.nvim",  dependencies = "nvim-lua/plenary.nvim" },
@@ -9,10 +18,33 @@ return {
     -- others
     { "windwp/nvim-autopairs",   config = true },
     { "windwp/nvim-ts-autotag",  config = true },
+
+    -- folke :)
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        opts = {},
+        opts = {
+            search = {
+                exclude = {
+                    "notify",
+                    "cmp_menu",
+                    "noice",
+                    "flash_prompt",
+                    -- disable search in nvim-tree
+                    "NvimTree",
+                    function(win)
+                        -- exclude non-focusable windows
+                        return not vim.api.nvim_win_get_config(win).focusable
+                    end,
+                },
+            },
+            modes = {
+                search = {
+                    -- disable search on / (if search miss, skips to random place and it's annoying)
+                    enabled = false
+                }
+            }
+        },
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
             { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },

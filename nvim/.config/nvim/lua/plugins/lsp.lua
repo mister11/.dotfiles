@@ -3,6 +3,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "elixir-tools/elixir-tools.nvim",
         { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
@@ -11,16 +12,16 @@ return {
                 update_in_insert = true,
             })
 
-        NnoremapGlobal('<leader>eo', vim.diagnostic.open_float)
-        NnoremapGlobal('<leader>en', vim.diagnostic.goto_prev)
-        NnoremapGlobal('<leader>ep', vim.diagnostic.goto_next)
-        NnoremapGlobal('<leader>eq', vim.diagnostic.setloclist)
+        NnoremapGlobal('<leader>e', vim.diagnostic.open_float)
+        NnoremapGlobal('[d', vim.diagnostic.goto_prev)
+        NnoremapGlobal(']d', vim.diagnostic.goto_next)
 
         local lsp_attach = function(client, bufnr)
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
             Nnoremap('gD', vim.lsp.buf.declaration)
-            Nnoremap('gd', vim.lsp.buf.definition)
+            Nnoremap('gd', "<cmd>Telescope lsp_definitions<cr>")
+            Nnoremap('gr', "<cmd>Telescope lsp_references<cr>")
             Nnoremap('K', vim.lsp.buf.hover)
             Nnoremap('<leader>li', vim.lsp.buf.implementation)
             Nnoremap('<leader>ls', vim.lsp.buf.signature_help)
@@ -28,7 +29,6 @@ return {
             Nnoremap('<leader>ltd', vim.lsp.buf.type_definition)
             Nnoremap('<leader>lr', vim.lsp.buf.rename)
             Nnoremap('<leader>la', vim.lsp.buf.code_action)
-            Nnoremap('<leader>lu', vim.lsp.buf.references)
             Nnoremap('<leader>lf', function() vim.lsp.buf.format { async = true } end)
 
             if client.server_capabilities.inlayHintProvider then
@@ -47,6 +47,7 @@ return {
                 'html',
                 'jsonls',
                 'lua_ls',
+                -- 'nextls',
                 'pyright',
                 'rust_analyzer',
                 'svelte',
@@ -58,15 +59,12 @@ return {
         })
 
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
         local lspconfig = require('lspconfig')
-
-
         local lsp_configs = require('lspconfig.configs')
-
-
         local lexical_config = {
             filetypes = { "elixir", "eelixir", "heex" },
-            cmd = { "/home/mister11/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+            cmd = { "/home/mister11/dev/support/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
             settings = {},
         }
 
@@ -89,6 +87,25 @@ return {
             capabilities = lsp_capabilities,
         })
 
+        -- local elixir = require("elixir")
+        -- elixir.setup {
+        --     nextls = {
+        --         enable = true,
+        --         init_options = {
+        --             experimental = {
+        --                 completions = {
+        --                     enable = true
+        --                 }
+        --             }
+        --         },
+        --         on_attach = function(client, bufnr)
+        --             lsp_attach(client, bufnr)
+        --             require('cmp_nvim_lsp').update_capabilities(lsp_capabilities)
+        --         end
+        --     },
+        --     credo = { enable = false },
+        --     elixirls = { enable = false }
+        -- }
 
         require('mason-lspconfig').setup_handlers({
             function(server_name)

@@ -37,23 +37,25 @@ autocmd('TextYankPost', {
     callback = function()
         vim.highlight.on_yank({
             higroup = 'IncSearch',
-            timeout = 40,
+            timeout = 100,
         })
     end,
 })
 
 local filetype_group = augroup("FileTypes", {})
-autocmd({"BufNewFile", "BufRead"}, {
+autocmd({ "BufNewFile", "BufRead" }, {
     group = filetype_group,
     pattern = "*.js.eex",
-    callback = function ()
+    callback = function()
         vim.bo.filetype = "javascript"
     end,
 })
-autocmd({"BufNewFile", "BufRead"}, {
+autocmd({ "BufNewFile", "BufRead" }, {
     group = filetype_group,
     pattern = "*.env",
-    callback = function ()
+    callback = function()
         vim.bo.filetype = "jproperties"
     end,
 })
+
+vim.api.nvim_create_autocmd({ "FocusGained", }, { command = "checktime" })

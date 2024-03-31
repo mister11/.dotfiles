@@ -2,6 +2,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     tag = "v0.9.2",
     build = ":TSUpdate",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects"
+    },
     config = function()
         local configs = require("nvim-treesitter.configs")
         local filetypes = {
@@ -36,6 +39,24 @@ return {
             autotag = {
                 enable = true,
                 filetypes = filetypes,
+            },
+            textobjects = {
+                select = {
+                    enable = true,
+                },
+                swap = {
+                    enable = true,
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer"
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer"
+                    },
+                }
             }
         })
     end
