@@ -8,13 +8,13 @@ return {
         elixir.setup {
             nextls = {
                 enable = true,
-                -- init_options = {
-                --     experimental = {
-                --         completions = {
-                --             enable = true
-                --         }
-                --     }
-                -- },
+                init_options = {
+                    experimental = {
+                        completions = {
+                            enable = true
+                        }
+                    }
+                },
             },
             credo = { enable = false },
             elixirls = { enable = false }

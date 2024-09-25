@@ -32,7 +32,7 @@ return {
             Nnoremap('<leader>lf', function() vim.lsp.buf.format { async = true } end)
 
             if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint.enable(bufnr, true)
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
             end
         end
 
@@ -42,7 +42,6 @@ return {
                 'astro',
                 'bashls',
                 -- 'elixirls',
-                'emmet_ls',
                 'gopls',
                 'html',
                 'jsonls',
@@ -50,10 +49,12 @@ return {
                 -- 'nextls',
                 'pyright',
                 'rust_analyzer',
+                'sqls',
                 'svelte',
                 'terraformls',
                 'tailwindcss',
-                'tsserver',
+                'ts_ls',
+                'volar',
                 'yamlls',
             }
         })
@@ -87,6 +88,13 @@ return {
             capabilities = lsp_capabilities,
         })
 
+        local flutter = require("flutter-tools")
+        flutter.setup {
+            lsp = {
+                on_attach = lsp_attach
+            }
+        }
+
         -- local elixir = require("elixir")
         -- elixir.setup {
         --     nextls = {
@@ -99,6 +107,7 @@ return {
         --             }
         --         },
         --         on_attach = function(client, bufnr)
+        --             print("On attach")
         --             lsp_attach(client, bufnr)
         --             require('cmp_nvim_lsp').update_capabilities(lsp_capabilities)
         --         end
@@ -107,6 +116,10 @@ return {
         --     elixirls = { enable = false }
         -- }
 
+        vim.g.rustaceanvim = {
+            server = { on_attach = lsp_attach },
+        }
+
         require('mason-lspconfig').setup_handlers({
             function(server_name)
                 lspconfig[server_name].setup({
@@ -114,6 +127,7 @@ return {
                     capabilities = lsp_capabilities,
                 })
             end,
+            ["rust_analyzer"] = function() end,
             ["gopls"] = function()
                 lspconfig.gopls.setup {
                     on_attach = lsp_attach,
@@ -138,6 +152,13 @@ return {
                         },
                     },
                     root_dir = lspconfig.util.root_pattern("mix.exs", ".git")
+                }
+            end,
+            ["html"] = function()
+                lspconfig.html.setup {
+                    on_attach = lsp_attach,
+                    capabilities = lsp_capabilities,
+                    filetypes = { "html", "heex", "elixir-heex" }
                 }
             end
         })

@@ -1,5 +1,5 @@
 return {
-     {
+    {
         'kristijanhusak/vim-dadbod-ui',
         dependencies = {
             { 'tpope/vim-dadbod',                     lazy = true },
@@ -33,9 +33,16 @@ return {
 
     -- others
     { "windwp/nvim-autopairs",   config = true },
-    { "windwp/nvim-ts-autotag",  config = true },
+    {
+        "windwp/nvim-ts-autotag",
+        opts = {
+            aliases = {
+                ["heex"] = "html",
+                ["elixir"] = "html",
+            }
+        }
+    },
 
-    -- folke :)
     {
         "folke/flash.nvim",
         event = "VeryLazy",

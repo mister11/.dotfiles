@@ -7,15 +7,6 @@ return {
     },
     config = function()
         local configs = require("nvim-treesitter.configs")
-        local filetypes = {
-            'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx',
-            'rescript',
-            'xml',
-            'php',
-            'markdown',
-            'astro', 'glimmer', 'handlebars', 'hbs',
-            'heex'
-        }
 
         configs.setup({
             ensure_installed = "all",
@@ -23,6 +14,7 @@ return {
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
+                disable = { "csv" }
             },
             incremental_selection = {
                 enable = true,
@@ -34,11 +26,9 @@ return {
                 },
             },
             indent = {
-                enable = true
-            },
-            autotag = {
                 enable = true,
-                filetypes = filetypes,
+                -- NOTE: enabling indentation significantly slows down editing in Dart files
+                disable = { 'dart' }
             },
             textobjects = {
                 select = {

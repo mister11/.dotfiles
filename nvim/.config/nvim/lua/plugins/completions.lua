@@ -27,6 +27,7 @@ return {
                     luasnip.lsp_expand(args.body)
                 end,
             },
+            preselect = cmp.PreselectMode.None,
             mapping = {
                 ['<c-p>'] = cmp.mapping.select_prev_item(),
                 ['<c-n>'] = cmp.mapping.select_next_item(),
@@ -34,9 +35,7 @@ return {
                 ['<c-u>'] = cmp.mapping.scroll_docs(4),
                 ['<c-space>'] = cmp.mapping.complete(),
                 ['<c-e>'] = cmp.mapping.close(),
-                ['<cr>'] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.replace
-                },
+                ['<cr>'] = cmp.mapping.confirm(),
                 ['<C-l>'] = cmp.mapping(function()
                     if luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
@@ -75,6 +74,20 @@ return {
             luasnip.parser.parse_snippet(
                 "fni",
                 "def ${1:func_name}(${2:args}), do: ${0}"
+            )
+        })
+
+        luasnip.add_snippets("go", {
+            luasnip.parser.parse_snippet(
+                "errr",
+                "if err != nil {\n\treturn err\n}"
+            )
+        })
+
+        luasnip.add_snippets("go", {
+            luasnip.parser.parse_snippet(
+                "errm",
+                "if err != nil {\n\treturn ${1:return_value}, err\n}"
             )
         })
     end
