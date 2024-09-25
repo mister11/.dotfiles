@@ -6,3 +6,4 @@ require('mister11.lazy')
 
 vim.o.background = "dark"
 vim.cmd.colorscheme("gruvbox")
+

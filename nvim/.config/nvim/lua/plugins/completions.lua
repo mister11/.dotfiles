@@ -27,15 +27,16 @@ return {
                     luasnip.lsp_expand(args.body)
                 end,
             },
-            preselect = cmp.PreselectMode.None,
-            mapping = {
+            mapping = cmp.mapping.preset.insert({
                 ['<c-p>'] = cmp.mapping.select_prev_item(),
                 ['<c-n>'] = cmp.mapping.select_next_item(),
                 ['<c-d>'] = cmp.mapping.scroll_docs(-4),
                 ['<c-u>'] = cmp.mapping.scroll_docs(4),
                 ['<c-space>'] = cmp.mapping.complete(),
                 ['<c-e>'] = cmp.mapping.close(),
-                ['<cr>'] = cmp.mapping.confirm(),
+                ['<cr>'] = cmp.mapping.confirm {
+                    behavior = cmp.ConfirmBehavior.replace
+                },
                 ['<C-l>'] = cmp.mapping(function()
                     if luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
@@ -46,14 +47,13 @@ return {
                         luasnip.jump(-1)
                     end
                 end, { 'i', 's' }),
-            },
-            sources = {
+            }),
+            sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
-                { name = 'vim-dadbod-completion' }
-            }
+            })
         }
 
         luasnip.add_snippets("all", {
@@ -90,5 +90,7 @@ return {
                 "if err != nil {\n\treturn ${1:return_value}, err\n}"
             )
         })
+
+        require("luasnip.loaders.from_vscode").lazy_load()
     end
 }

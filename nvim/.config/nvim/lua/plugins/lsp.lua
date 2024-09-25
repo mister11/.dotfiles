@@ -22,6 +22,7 @@ return {
             Nnoremap('gD', vim.lsp.buf.declaration)
             Nnoremap('gd', "<cmd>Telescope lsp_definitions<cr>")
             Nnoremap('gr', "<cmd>Telescope lsp_references<cr>")
+            Nnoremap('gs', "<cmd>Telescope lsp_document_symbols<cr>")
             Nnoremap('K', vim.lsp.buf.hover)
             Nnoremap('<leader>li', vim.lsp.buf.implementation)
             Nnoremap('<leader>ls', vim.lsp.buf.signature_help)
@@ -42,6 +43,7 @@ return {
                 'astro',
                 'bashls',
                 -- 'elixirls',
+                'emmet_ls',
                 'gopls',
                 'html',
                 'jsonls',
@@ -54,7 +56,6 @@ return {
                 'terraformls',
                 'tailwindcss',
                 'ts_ls',
-                'volar',
                 'yamlls',
             }
         })
@@ -62,6 +63,8 @@ return {
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
         local lspconfig = require('lspconfig')
+
+        -- Lexical
         local lsp_configs = require('lspconfig.configs')
         local lexical_config = {
             filetypes = { "elixir", "eelixir", "heex" },
@@ -82,7 +85,6 @@ return {
                 },
             }
         end
-
         lspconfig.lexical.setup({
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
@@ -127,7 +129,6 @@ return {
                     capabilities = lsp_capabilities,
                 })
             end,
-            ["rust_analyzer"] = function() end,
             ["gopls"] = function()
                 lspconfig.gopls.setup {
                     on_attach = lsp_attach,

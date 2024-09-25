@@ -2,19 +2,18 @@ return {
     "nvim-treesitter/nvim-treesitter",
     tag = "v0.9.2",
     build = ":TSUpdate",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects"
-    },
+    -- breaks JS for whatever reason, probably should use mini.ai
+    -- dependencies = {
+    --     "nvim-treesitter/nvim-treesitter-textobjects"
+    -- },
     config = function()
         local configs = require("nvim-treesitter.configs")
-
         configs.setup({
             ensure_installed = "all",
             sync_install = false,
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
-                disable = { "csv" }
             },
             incremental_selection = {
                 enable = true,
@@ -26,28 +25,18 @@ return {
                 },
             },
             indent = {
-                enable = true,
-                -- NOTE: enabling indentation significantly slows down editing in Dart files
-                disable = { 'dart' }
+                enable = true
             },
-            textobjects = {
-                select = {
-                    enable = true,
-                },
-                swap = {
-                    enable = true,
-                },
-                move = {
-                    enable = true,
-                    set_jumps = true,
-                    goto_next_start = {
-                        ["]f"] = "@function.outer"
-                    },
-                    goto_previous_start = {
-                        ["[f"] = "@function.outer"
-                    },
-                }
-            }
+            -- textobjects = {
+            --     select = {
+            --         enable = true,
+            --         lookahead = true,
+            --         keymaps = {
+            --             ["af"] = "@function.outer",
+            --             ["if"] = "@function.inner"
+            --         }
+            --     }
+            -- }
         })
     end
 }

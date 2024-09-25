@@ -16,6 +16,7 @@ return {
             vim.g.db_ui_use_nerd_fonts = 1
         end,
     },
+
     -- AI
     {
         "github/copilot.vim",
@@ -43,8 +44,10 @@ return {
         }
     },
 
+    -- folke :)
     {
         "folke/flash.nvim",
+
         event = "VeryLazy",
         opts = {
             search = {
@@ -84,5 +87,5 @@ return {
         keys = {
             { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
         },
-    },
+    }
 }
