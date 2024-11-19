@@ -1,6 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    tag = "v0.9.2",
+    -- tag = "v0.9.3",
     build = ":TSUpdate",
     -- breaks JS for whatever reason, probably should use mini.ai
     -- dependencies = {
@@ -25,7 +25,10 @@ return {
                 },
             },
             indent = {
-                enable = true
+                enable = true,
+                disable = {
+                    "dart"
+                },
             },
             -- textobjects = {
             --     select = {

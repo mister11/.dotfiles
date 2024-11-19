@@ -17,6 +17,10 @@ return {
         end,
     },
 
+    {
+        'mbbill/undotree'
+    },
+
     -- AI
     {
         "github/copilot.vim",

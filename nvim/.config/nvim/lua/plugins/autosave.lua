@@ -3,9 +3,6 @@ return {
     event = { "InsertLeave", "TextChanged" },
     config = function()
         require("auto-save").setup({
-            execution_message = {
-                message = "Autosaved!"
-            },
             debounce_delay = 135,
             condition = function(buf)
                 if vim.bo[buf].filetype == "harpoon" then

@@ -2,7 +2,10 @@ return {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     opts = {
-        contrast = "hard"
+        contrast = "hard",
+        overrides = {
+            ["@module.elixir"] = { link = "GruvboxYellow" }
+        }
     },
-    config = true
+    config = true,
 }

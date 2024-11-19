@@ -42,13 +42,11 @@ return {
             ensure_installed = {
                 'astro',
                 'bashls',
-                -- 'elixirls',
                 'emmet_ls',
                 'gopls',
                 'html',
                 'jsonls',
                 'lua_ls',
-                -- 'nextls',
                 'pyright',
                 'rust_analyzer',
                 'sqls',

@@ -27,6 +27,8 @@ XnoremapGlobal("<leader>p", "\"_dP")
 
 NnoremapGlobal("<leader>a", "ggVG")
 
+NnoremapGlobal('<leader>u', '<cmd>UndotreeToggle<cr>')
+
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -104,4 +106,16 @@ vim.api.nvim_create_autocmd('filetype', {
 			end,
 			{ remap = true, buffer = true })
 	end
+})
+
+local group = vim.api.nvim_create_augroup('autosave', {})
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'AutoSaveWritePost',
+    group = group,
+    callback = function(opts)
+        if opts.data.saved_buffer ~= nil then
+            print("Autosaved!")
+        end
+    end,
 })
