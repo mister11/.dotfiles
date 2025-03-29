@@ -1,14 +1,8 @@
--- buffers, local and quickfix list skips
-NnoremapGlobal('gn', '<cmd>bnext<cr>')
-NnoremapGlobal('gp', '<cmd>bprev<cr>')
-NnoremapGlobal("<C-j>", ":cnext<CR>zz")
-NnoremapGlobal("<C-k>", ":cprev<CR>zz")
-NnoremapGlobal("<leader>k", ":lnext<CR>zz")
-NnoremapGlobal("<leader>j", ":lprev<CR>zz")
-
 -- find and center
 NnoremapGlobal("n", "nzzzv")
 NnoremapGlobal("N", "Nzzzv")
+NnoremapGlobal("]q", ":cnext<CR>zzzv")
+NnoremapGlobal("[q", ":cprev<CR>zzzv")
 
 
 -- moving lines

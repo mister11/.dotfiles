@@ -3,18 +3,20 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "elixir-tools/elixir-tools.nvim",
         { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
-        vim.lsp.handlers["textdocument/publishdiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-                update_in_insert = true,
-            })
-
         NnoremapGlobal('<leader>e', vim.diagnostic.open_float)
-        NnoremapGlobal('[d', vim.diagnostic.goto_prev)
-        NnoremapGlobal(']d', vim.diagnostic.goto_next)
+        NnoremapGlobal('[d', function()
+            vim.diagnostic.goto_prev()
+            vim.cmd('normal! zz')
+        end)
+        NnoremapGlobal(']d', function()
+            vim.diagnostic.goto_next()
+            vim.cmd('normal! zz')
+        end)
+
+        vim.diagnostic.config({ virtual_text = true })
 
         local lsp_attach = function(client, bufnr)
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -42,7 +44,6 @@ return {
             ensure_installed = {
                 'astro',
                 'bashls',
-                'emmet_ls',
                 'gopls',
                 'html',
                 'jsonls',
@@ -58,7 +59,7 @@ return {
             }
         })
 
-        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 
         local lspconfig = require('lspconfig')
 
@@ -94,27 +95,6 @@ return {
                 on_attach = lsp_attach
             }
         }
-
-        -- local elixir = require("elixir")
-        -- elixir.setup {
-        --     nextls = {
-        --         enable = true,
-        --         init_options = {
-        --             experimental = {
-        --                 completions = {
-        --                     enable = true
-        --                 }
-        --             }
-        --         },
-        --         on_attach = function(client, bufnr)
-        --             print("On attach")
-        --             lsp_attach(client, bufnr)
-        --             require('cmp_nvim_lsp').update_capabilities(lsp_capabilities)
-        --         end
-        --     },
-        --     credo = { enable = false },
-        --     elixirls = { enable = false }
-        -- }
 
         vim.g.rustaceanvim = {
             server = { on_attach = lsp_attach },

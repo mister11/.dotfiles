@@ -30,8 +30,23 @@ vim.opt.smartcase = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
-vim.cmd [[
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set nofoldenable
-]]
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+-- Prefer LSP folding if client supports it
+-- This did not work (Elixir and Go), but leaving if for the future
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     callback = function(args)
+--          local client = vim.lsp.get_client_by_id(args.data.client_id)
+--          if client:supports_method('textDocument/foldingRange') then
+--              print("LSP folding enabled")
+--              local win = vim.api.nvim_get_current_win()
+--              vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+--         end
+--     end,
+--  })
+
+vim.opt.foldcolumn = "0"
+vim.opt.fillchars:append({fold = " "})
