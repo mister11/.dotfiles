@@ -49,6 +49,7 @@ return {
                 'jsonls',
                 'lua_ls',
                 'pyright',
+                'ruff',
                 'rust_analyzer',
                 'sqls',
                 'svelte',
@@ -139,6 +140,24 @@ return {
                     capabilities = lsp_capabilities,
                     filetypes = { "html", "heex", "elixir-heex" }
                 }
+            end,
+            ["pyright"] = function()
+                lspconfig.pyright.setup({
+                    on_attach = lsp_attach,
+                    capabilities = lsp_capabilities,
+                    settings = {
+                        pyright = {
+                            -- Using Ruff's import organizer
+                            disableOrganizeImports = true,
+                        },
+                        python = {
+                            analysis = {
+                                -- Ignore all files for analysis to exclusively use Ruff for linting
+                                ignore = { '*' },
+                            },
+                        },
+                    },
+                })
             end
         })
     end,

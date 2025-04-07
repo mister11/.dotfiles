@@ -27,7 +27,7 @@ return {
             },
             list = {
                 selection = {
-                    preselect = true,
+                    preselect = false,
                     auto_insert = false
                 }
             },
@@ -43,9 +43,6 @@ return {
         snippets = {
             preset = 'luasnip',
         },
-        -- cmdline = {
-        --     sources = {}
-        -- },
         sources = {
             default = { 'lsp', 'snippets', 'buffer', 'path' }
         },
