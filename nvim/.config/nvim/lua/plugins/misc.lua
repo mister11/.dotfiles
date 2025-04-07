@@ -22,15 +22,15 @@ return {
     },
 
     -- AI
-    {
-        "github/copilot.vim",
-        config = function()
-            vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
-                expr = true,
-                replace_keycodes = false
-            })
-        end
-    },
+    -- {
+    --     "github/copilot.vim",
+    --     config = function()
+    --         vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+    --             expr = true,
+    --             replace_keycodes = false
+    --         })
+    --     end
+    -- },
 
     -- git
     { "sindrets/diffview.nvim",  dependencies = "nvim-lua/plenary.nvim" },
