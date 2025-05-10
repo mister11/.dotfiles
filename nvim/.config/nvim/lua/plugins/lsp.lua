@@ -56,9 +56,11 @@ return {
                 'terraformls',
                 'tailwindcss',
                 'ts_ls',
+                'volar',
                 'yamlls',
             }
         })
+        vim.lsp.set_log_level("DEBUG")
 
         local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 
@@ -72,93 +74,98 @@ return {
             settings = {},
         }
 
-        if not lsp_configs.lexical then
-            lsp_configs.lexical = {
-                default_config = {
-                    filetypes = lexical_config.filetypes,
-                    cmd = lexical_config.cmd,
-                    root_dir = function(fname)
-                        return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-                    end,
-                    -- optional settings
-                    settings = lexical_config.settings,
-                },
-            }
-        end
-        lspconfig.lexical.setup({
+        -- if not lsp_configs.lexical then
+        --     lsp_configs.lexical = {
+        --         default_config = {
+        --             filetypes = lexical_config.filetypes,
+        --             cmd = lexical_config.cmd,
+        --             root_dir = function(fname)
+        --                 return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+        --             end,
+        --             -- optional settings
+        --             settings = lexical_config.settings,
+        --         },
+        --     }
+        -- end
+        -- lspconfig.lexical.setup({
+        --     on_attach = lsp_attach,
+        --     capabilities = lsp_capabilities,
+        -- })
+
+        vim.lsp.config('lexical', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
+            filetypes = lexical_config.filetypes,
+            cmd = lexical_config.cmd,
+            root_dir = function(bufnr, on_dir)
+                local fname = vim.api.nvim_buf_get_name(bufnr)
+                local matches = vim.fs.find({ 'mix.exs' }, { upward = true, limit = 2, path = fname })
+                local child_or_root_path, maybe_umbrella_path = unpack(matches)
+                local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
+
+                on_dir(root_dir)
+            end,
+            -- optional settings
+            settings = lexical_config.settings,
+        })
+        vim.lsp.enable('lexical')
+
+        vim.lsp.config('ts_ls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+            init_options = {
+                plugins = {
+                    {
+                        name = '@vue/typescript-plugin',
+                        location = vim.fn.stdpath 'data' ..
+                            '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                        languages = { 'vue' },
+                    },
+                },
+            },
+            filetypes = {
+                "javascript",
+                "typescript",
+                "vue",
+            },
         })
 
-        local flutter = require("flutter-tools")
-        flutter.setup {
-            lsp = {
-                on_attach = lsp_attach
-            }
-        }
+        vim.lsp.config('gopls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+            cmd = { "gopls", "serve" },
+            filetypes = { "go", "gomod" },
+            settings = {
+                gopls = {
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+                },
+            },
+        })
 
-        vim.g.rustaceanvim = {
-            server = { on_attach = lsp_attach },
-        }
+        vim.lsp.config('html', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+            filetypes = { "html", "heex", "elixir-heex" },
+        })
 
-        require('mason-lspconfig').setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                })
-            end,
-            ["gopls"] = function()
-                lspconfig.gopls.setup {
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                    cmd = { "gopls", "serve" },
-                    filetypes = { "go", "gomod" },
-                    settings = {
-                        gopls = {
-                            analyses = {
-                                unusedparams = true,
-                            },
-                            staticcheck = true,
-                        },
+        vim.lsp.config('pyright', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+            settings = {
+                pyright = {
+                    -- Using Ruff's import organizer
+                    disableOrganizeImports = true,
+                },
+                python = {
+                    analysis = {
+                        -- Ignore all files for analysis to exclusively use Ruff for linting
+                        ignore = { '*' },
                     },
-                }
-            end,
-            ["tailwindcss"] = function()
-                lspconfig.tailwindcss.setup {
-                    init_options = {
-                        userLanguages = {
-                            heex = "html-eex",
-                        },
-                    },
-                    root_dir = lspconfig.util.root_pattern("mix.exs", ".git")
-                }
-            end,
-            ["html"] = function()
-                lspconfig.html.setup {
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                    filetypes = { "html", "heex", "elixir-heex" }
-                }
-            end,
-            ["pyright"] = function()
-                lspconfig.pyright.setup({
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                    settings = {
-                        pyright = {
-                            -- Using Ruff's import organizer
-                            disableOrganizeImports = true,
-                        },
-                        python = {
-                            analysis = {
-                                -- Ignore all files for analysis to exclusively use Ruff for linting
-                                ignore = { '*' },
-                            },
-                        },
-                    },
-                })
-            end
+                },
+            },
         })
     end,
 }
