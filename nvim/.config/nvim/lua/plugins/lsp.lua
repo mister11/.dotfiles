@@ -56,7 +56,7 @@ return {
                 'terraformls',
                 'tailwindcss',
                 'ts_ls',
-                'volar',
+                'vue_ls',
                 'yamlls',
             }
         })
@@ -92,12 +92,26 @@ return {
         })
         vim.lsp.enable('lexical')
 
+        vim.lsp.config['kotlinls'] = {
+            cmd = { '/home/mister11/dev/support/kotlin/kotlin-lsp.sh', '--stdio' },
+            filetypes = { 'kotlin' },
+            single_file_support = true,
+            root_markers = { "build.gradle", "build.gradle.kts" },
+            settings = {}
+        }
+        vim.lsp.enable('kotlinls')
+
         vim.lsp.config('svelte', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities
         })
 
         vim.lsp.config('jsonls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities
+        })
+
+        vim.lsp.config('lua_ls', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities
         })
@@ -111,7 +125,7 @@ return {
                         name = '@vue/typescript-plugin',
                         location = vim.fn.stdpath 'data' ..
                             '/mason/packages/vue-language-server/node_modules/@vue/language-server',
-				        languages = { "typescript", "javascript", "vue" },
+                        languages = { "typescript", "javascript", "vue" },
                     },
                 },
             },
