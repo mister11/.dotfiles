@@ -74,24 +74,6 @@ return {
             settings = {},
         }
 
-        -- if not lsp_configs.lexical then
-        --     lsp_configs.lexical = {
-        --         default_config = {
-        --             filetypes = lexical_config.filetypes,
-        --             cmd = lexical_config.cmd,
-        --             root_dir = function(fname)
-        --                 return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-        --             end,
-        --             -- optional settings
-        --             settings = lexical_config.settings,
-        --         },
-        --     }
-        -- end
-        -- lspconfig.lexical.setup({
-        --     on_attach = lsp_attach,
-        --     capabilities = lsp_capabilities,
-        -- })
-
         vim.lsp.config('lexical', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
@@ -110,6 +92,16 @@ return {
         })
         vim.lsp.enable('lexical')
 
+        vim.lsp.config('svelte', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities
+        })
+
+        vim.lsp.config('jsonls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities
+        })
+
         vim.lsp.config('ts_ls', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
@@ -119,7 +111,7 @@ return {
                         name = '@vue/typescript-plugin',
                         location = vim.fn.stdpath 'data' ..
                             '/mason/packages/vue-language-server/node_modules/@vue/language-server',
-                        languages = { 'vue' },
+				        languages = { "typescript", "javascript", "vue" },
                     },
                 },
             },
