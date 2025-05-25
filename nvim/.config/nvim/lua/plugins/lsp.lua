@@ -93,6 +93,8 @@ return {
         vim.lsp.enable('lexical')
 
         vim.lsp.config['kotlinls'] = {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
             cmd = { '/home/mister11/dev/support/kotlin/kotlin-lsp.sh', '--stdio' },
             filetypes = { 'kotlin' },
             single_file_support = true,
