@@ -51,7 +51,7 @@ return {
                 'pyright',
                 'ruff',
                 'rust_analyzer',
-                'sqls',
+                'sqlls',
                 'svelte',
                 'terraformls',
                 'tailwindcss',
@@ -60,7 +60,6 @@ return {
                 'yamlls',
             }
         })
-        vim.lsp.set_log_level("DEBUG")
 
         local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 
@@ -91,6 +90,11 @@ return {
             settings = lexical_config.settings,
         })
         vim.lsp.enable('lexical')
+
+        vim.lsp.config('sqlls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+        })
 
         vim.lsp.config['kotlinls'] = {
             on_attach = lsp_attach,
