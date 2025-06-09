@@ -5,7 +5,7 @@ ZSH_THEME="dpoggi"
 ENABLE_CORRECTION="true"
 DISABLE_MAGIC_FUNCTIONS="true"
 
-plugins=(git mix golang docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(asdf git mix golang docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
 
 # setup private stuff
 # keep this after plugins as it add home/work specific plugins
@@ -26,20 +26,21 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.pulumi/bin:$PATH"
 export PATH="$HOME/.local/kitty.app/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$HOME/.asdf/shims:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
-fpath=(~/.zsh/completion $fpath)
 
 unsetopt correct_all
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-. /opt/asdf-vm/asdf.sh
-. ~/.asdf/plugins/java/set-java-home.zsh
+fpath=(~/.zsh/completion $fpath)
+fpath=(~/.asdf/completions $fpath)
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+autoload -Uz compinit && compinit
 
 # shortcuts
 bindkey -s '^f' 'tmux-sessionizer\n' 
@@ -47,3 +48,7 @@ bindkey -s '^f' 'tmux-sessionizer\n'
 source /usr/share/fzf/key-bindings.zsh
 source $HOME/.local/bin/socli_completions
 source $HOME/.local/bin/flyctl_completions
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+source "/home/mister11/.sdkman/bin/sdkman-init.sh"

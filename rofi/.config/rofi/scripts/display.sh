@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-question=$(echo " -> monitors| -> laptop" | rofi -sep "|"  \
+question=$(echo -e " -> monitors| -> laptop" | rofi -sep "|"  \
             -dmenu -i -p 'Display' "" \
             -theme-str 'listview {lines: 2; scrollbar: false;} window {width: 15%;}')
 

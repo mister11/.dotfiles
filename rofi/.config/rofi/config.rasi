@@ -2,6 +2,7 @@ configuration {
 	modi: "window,run,drun";
 	font: "JetBrainsMono Nerd Font Mono 12";
     sorting-method: "fzf";
+    show-icons: true;
     matching: "fuzzy";
     timeout {
       action: "kb-cancel";
@@ -13,4 +14,4 @@ configuration {
     }
 }
 
-@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+@theme "~/.config/rofi/gruvbox.rasi"

@@ -142,6 +142,11 @@ return {
             },
         })
 
+        vim.lsp.config('svelte', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities
+        })
+
         vim.lsp.config('gopls', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
