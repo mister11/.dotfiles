@@ -48,5 +48,32 @@ vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 --     end,
 --  })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if client.name == "rust-analyzer" then
+            vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+            Nnoremap('gD', vim.lsp.buf.declaration)
+            Nnoremap('gd', "<cmd>Telescope lsp_definitions<cr>")
+            Nnoremap('gr', "<cmd>Telescope lsp_references<cr>")
+            Nnoremap('gs', "<cmd>Telescope lsp_document_symbols<cr>")
+            Nnoremap('K', vim.lsp.buf.hover)
+            Nnoremap('<leader>li', vim.lsp.buf.implementation)
+            Nnoremap('<leader>ls', vim.lsp.buf.signature_help)
+            Inoremap('<C-k>', vim.lsp.buf.signature_help)
+            Nnoremap('<leader>ltd', vim.lsp.buf.type_definition)
+            Nnoremap('<leader>lr', vim.lsp.buf.rename)
+            Nnoremap('<leader>la', vim.lsp.buf.code_action)
+            Nnoremap('<leader>lf', function() vim.lsp.buf.format { async = true } end)
+
+            if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+            end
+        end
+    end,
+})
+
 vim.opt.foldcolumn = "0"
-vim.opt.fillchars:append({fold = " "})
+vim.opt.fillchars:append({ fold = " " })

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cliphist list | rofi -dmenu | cliphist decode | wl-copy
+
+window_name=$(hyprctl -j activewindow | jq -r '.class')
+
+if [ "$window_name" == "kitty" ]; then
+  wtype -M ctrl -M shift v -m ctrl -m shift
+else
+  wtype -M ctrl v -m ctrl
+fi

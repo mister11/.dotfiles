@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-latest_tag_sha=$(curl -s https://api.github.com/repos/elixir-lang/elixir/tags \
-  | jq -r '[.[] | select(.name | contains("rc") | not)] | .[0].name' \
-  | tr -d '"')
-
+latest_tag_name=$(curl -s https://api.github.com/repos/elixir-lang/elixir/releases/latest | jq -r '.tag_name')
 
 asdf install elixir "ref:$latest_tag_name"
-asdf global elixir "ref:$latest_tag_name"
+asdf set -u elixir "ref:$latest_tag_name"
 
 rm -r "$HOME"/.asdf/shims/livebook
 

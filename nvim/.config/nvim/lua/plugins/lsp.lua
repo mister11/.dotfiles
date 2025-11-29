@@ -48,10 +48,9 @@ return {
                 'html',
                 'jsonls',
                 'lua_ls',
-                'pyright',
+                'basedpyright',
                 'ruff',
-                'rust_analyzer',
-                'sqlls',
+                'sqls',
                 'svelte',
                 'terraformls',
                 'tailwindcss',
@@ -91,7 +90,12 @@ return {
         })
         vim.lsp.enable('lexical')
 
-        vim.lsp.config('sqlls', {
+        vim.lsp.config('sqls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+        })
+
+        vim.lsp.config('rust_analyzer', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
         })
@@ -99,10 +103,10 @@ return {
         vim.lsp.config['kotlinls'] = {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
-            cmd = { '/home/mister11/dev/support/kotlin/kotlin-lsp.sh', '--stdio' },
+            cmd = { '/home/mister11/dev/support/kotlin-lsp/lsp/kotlin-lsp.sh', '--stdio' },
             filetypes = { 'kotlin' },
             single_file_support = true,
-            root_markers = { "build.gradle", "build.gradle.kts" },
+            root_markers = { "build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts" },
             settings = {}
         }
         vim.lsp.enable('kotlinls')
@@ -118,6 +122,11 @@ return {
         })
 
         vim.lsp.config('lua_ls', {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities
+        })
+
+        vim.lsp.config('bashls', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities
         })
@@ -168,21 +177,12 @@ return {
             filetypes = { "html", "heex", "elixir-heex" },
         })
 
-        vim.lsp.config('pyright', {
+        vim.lsp.config('basedpyright', {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
-            settings = {
-                pyright = {
-                    -- Using Ruff's import organizer
-                    disableOrganizeImports = true,
-                },
-                python = {
-                    analysis = {
-                        -- Ignore all files for analysis to exclusively use Ruff for linting
-                        ignore = { '*' },
-                    },
-                },
-            },
         })
+        vim.lsp.enable('basedpyright')
+        vim.lsp.enable('ruff')
+
     end,
 }
