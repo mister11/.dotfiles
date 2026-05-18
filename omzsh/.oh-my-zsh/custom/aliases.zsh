@@ -57,10 +57,22 @@ alias mttp='iex -S mix test --trace'
 alias mttt='mix test --trace --only sven'
 alias mtttp='iex -S mix test --trace --only sven'
 alias iexm='iex --no-pry -S mix'
-alias iexmn='iex --no-pry --sname $(basename $(pwd) | tr "-" "_") -S mix'
-alias iexp='iex --no-pry -S mix phx.server'
+alias iexmn='iex --sname $(basename $(pwd) | tr "-" "_") -S mix'
+alias iexp='iex -S mix phx.server'
 alias elsr='rm -rf .elixir_ls'
 alias elsrh='rm -rf deps _build .elixir_ls && mix deps.get'
+
+# ai
+syc() {
+  ANTHROPIC_BASE_URL=https://api.synthetic.new/anthropic \
+  ANTHROPIC_AUTH_TOKEN="syn_7ca9f8939d387e12e3b2275abd08d0d7" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL=hf:moonshotai/Kimi-K2.5 \
+  ANTHROPIC_DEFAULT_SONNET_MODEL=hf:moonshotai/Kimi-K2.5 \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL=hf:moonshotai/Kimi-K2.5 \
+  CLAUDE_CODE_SUBAGENT_MODEL=hf:moonshotai/Kimi-K2.5 \
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+  claude "$@"
+}
 
 extract() {
   if [ -z "$1" ]; then

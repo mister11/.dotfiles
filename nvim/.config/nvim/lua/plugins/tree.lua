@@ -6,38 +6,74 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     keys = {
-
-        { '<leader>pe', '<cmd>NvimTreeFocus<cr>', mode = 'n' },
-        { '<leader>pt', '<cmd>NvimTreeToggle<cr>', mode = 'n' },
+        { '<leader>pe', '<cmd>NvimTreeFocus<cr>',    mode = 'n' },
+        { '<leader>pt', '<cmd>NvimTreeToggle<cr>',   mode = 'n' },
         { '<leader>pf', '<cmd>NvimTreeFindFile<cr>', mode = 'n' }
     },
     config = function()
         require("nvim-tree").setup({
-            git = {
-                ignore = false
+            filters = {
+                -- show .gitignore files
+                git_ignored = false
             },
             view = {
-                adaptive_size = true
+                width = {
+                    -- adaptive width
+                    max = -1
+                }
             }
         })
-
-        -- auto-open only for directories
-        local function open_nvim_tree(data)
-            local directory = vim.fn.isdirectory(data.file) == 1
-
-            if not directory then
-                return
-            end
-
-            vim.cmd.cd(data.file)
-            require("nvim-tree.api").tree.open()
-        end
-        vim.api.nvim_create_autocmd("VimEnter", { callback = open_nvim_tree })
 
         -- automatically open file after create
         local api = require("nvim-tree.api")
         api.events.subscribe(api.events.Event.FileCreated, function(file)
             vim.cmd("edit " .. file.fname)
         end)
+
+        -- c/p files between Neovim instances and system
+        vim.api.nvim_create_autocmd('filetype', {
+            pattern = 'NvimTree',
+            desc = 'Mappings for NvimTree',
+            callback = function()
+                -- Yank marked files
+                vim.keymap.set('n', 'bgy',
+                    function()
+                        local api = require 'nvim-tree.api'
+                        local marks = api.marks.list()
+                        if #marks == 0 then
+                            print('No items marked')
+                            return
+                        end
+                        local absolute_file_paths = ''
+                        for _, mark in ipairs(marks) do
+                            absolute_file_paths = absolute_file_paths .. mark.absolute_path .. '\n'
+                        end
+                        -- Using system registers for multi-instance support.
+                        vim.fn.setreg("+", absolute_file_paths)
+                        print('Yanked ' .. #marks .. ' items')
+                    end,
+                    { remap = true, buffer = true })
+
+                -- Paste files
+                vim.keymap.set('n', 'gp',
+                    function()
+                        local api = require 'nvim-tree.api'
+                        local source_paths = {}
+                        for path in vim.fn.getreg('+'):gmatch('[^\n%s]+') do
+                            source_paths[#source_paths + 1] = path
+                        end
+                        local node = api.tree.get_node_under_cursor()
+                        local is_folder = node.fs_stat and node.fs_stat.type == 'directory' or false
+                        local target_path = is_folder and node.absolute_path or
+                            vim.fn.fnamemodify(node.absolute_path, ":h")
+                        for _, source_path in ipairs(source_paths) do
+                            vim.fn.system { 'cp', '-R', source_path, target_path }
+                        end
+                        api.tree.reload()
+                        print('Pasted ' .. #source_paths .. ' items')
+                    end,
+                    { remap = true, buffer = true })
+            end
+        })
     end,
 }

@@ -1,7 +1,11 @@
 return {
     'saghen/blink.cmp',
-    dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-
+    dependencies = {
+        {
+            'L3MON4D3/LuaSnip', version = 'v2.*',
+        },
+        "onsails/lspkind.nvim"
+    },
     -- use a release tag to download pre-built binaries
     version = '*',
 
@@ -37,7 +41,6 @@ return {
             }
         },
         appearance = {
-            use_nvim_cmp_as_default = true,
             nerd_font_variant = 'mono'
         },
         snippets = {

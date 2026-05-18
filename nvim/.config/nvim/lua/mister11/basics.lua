@@ -1,27 +1,23 @@
--- find and center
-NnoremapGlobal("n", "nzzzv")
-NnoremapGlobal("N", "Nzzzv")
-NnoremapGlobal("]q", ":cnext<CR>zzzv")
-NnoremapGlobal("[q", ":cprev<CR>zzzv")
-
+NmapGlobal("n", "nzzzv")
+NmapGlobal("N", "Nzzzv")
+NmapGlobal("]q", ":cnext<CR>zzzv")
+NmapGlobal("[q", ":cprev<CR>zzzv")
 
 -- moving lines
-NnoremapGlobal("<A-j>", ":m .+1<CR>==")
-NnoremapGlobal("<A-k>", ":m .-2<CR>==")
-InoremapGlobal("<A-j>", "<Esc>:m .+1<CR>==gi")
-InoremapGlobal("<A-k>", "<Esc>:m .-2<CR>==gi")
-VnoremapGlobal("<A-j>", ":m '>+1<CR>gv=gv")
-VnoremapGlobal("<A-k>", ":m '<-2<CR>gv=gv")
+NmapGlobal("<A-j>", ":m .+1<CR>==")
+NmapGlobal("<A-k>", ":m .-2<CR>==")
+ImapGlobal("<A-j>", "<Esc>:m .+1<CR>==gi")
+ImapGlobal("<A-k>", "<Esc>:m .-2<CR>==gi")
+VmapGlobal("<A-j>", ":m '>+1<CR>gv=gv")
+VmapGlobal("<A-k>", ":m '<-2<CR>gv=gv")
 
-NnoremapGlobal("<C-f>", "<cmd>:silent !tmux neww tmux-sessionizer<cr>", { silent = true })
+NmapGlobal("<C-f>", "<cmd>:silent !tmux neww tmux-sessionizer<cr>", { silent = true })
 
-NnoremapGlobal("<C-d>", "<C-d>zz")
-NnoremapGlobal("<C-u>", "<C-u>zz")
-XnoremapGlobal("<leader>p", "\"_dP")
+NmapGlobal("<C-d>", "<C-d>zz")
+NmapGlobal("<C-u>", "<C-u>zz")
+XmapGlobal("<leader>p", "\"_dP")
 
-NnoremapGlobal("<leader>a", "ggVG")
-
-NnoremapGlobal('<leader>u', '<cmd>UndotreeToggle<cr>')
+NmapGlobal("<leader>a", "ggVG")
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -102,14 +98,3 @@ vim.api.nvim_create_autocmd('filetype', {
 	end
 })
 
-local group = vim.api.nvim_create_augroup('autosave', {})
-
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'AutoSaveWritePost',
-    group = group,
-    callback = function(opts)
-        if opts.data.saved_buffer ~= nil then
-            print("Autosaved!")
-        end
-    end,
-})

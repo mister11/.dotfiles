@@ -32,6 +32,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 unsetopt correct_all
 
@@ -57,3 +59,12 @@ source $HOME/.local/bin/flyctl_completions
 export SDKMAN_DIR="$HOME/.sdkman"
 source "/home/mister11/.sdkman/bin/sdkman-init.sh"
 eval "$(/home/mister11/.local/bin/mise activate zsh)"
+
+export PATH=/home/mister11/.opencode/bin:$PATH
+export PATH=/home/mister11/dev/support/flutter/bin:$PATH
+
+
+
+# bun completions
+[ -s "/home/mister11/.bun/_bun" ] && source "/home/mister11/.bun/_bun"
+

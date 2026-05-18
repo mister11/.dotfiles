@@ -9,6 +9,18 @@ return {
                     return false
                 end
                 return true
+            end
+        })
+
+        local group = vim.api.nvim_create_augroup('autosave', {})
+
+        vim.api.nvim_create_autocmd('User', {
+            pattern = 'AutoSaveWritePost',
+            group = group,
+            callback = function(opts)
+                if opts.data.saved_buffer ~= nil then
+                    print("Autosaved!")
+                end
             end,
         })
     end
