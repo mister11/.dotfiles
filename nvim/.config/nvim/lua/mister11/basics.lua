@@ -158,3 +158,27 @@ vim.api.nvim_create_user_command('GithubOpen', open_in_github, {})
 
 -- Create a keymap (example: <leader>gh)
 vim.keymap.set('n', '<leader>gh', open_in_github, { desc = 'Open file in GitHub' })
+
+-- Work-specific for some filetypes
+local filetype_group = augroup("FileTypes", {})
+autocmd({ "BufNewFile", "BufRead" }, {
+    group = filetype_group,
+    pattern = "*.js.eex",
+    callback = function()
+        vim.bo.filetype = "javascript"
+    end,
+})
+autocmd({ "BufNewFile", "BufRead" }, {
+    group = filetype_group,
+    pattern = "*.env",
+    callback = function()
+        vim.bo.filetype = "jproperties"
+    end,
+})
+autocmd({ "BufNewFile", "BufRead" }, {
+    group = filetype_group,
+    pattern = "*.env.example",
+    callback = function()
+        vim.bo.filetype = "jproperties"
+    end,
+})
