@@ -98,3 +98,63 @@ vim.api.nvim_create_autocmd('filetype', {
 	end
 })
 
+-- Function to open current file in GitHub browser
+local function open_in_github()
+    -- Get the current file path relative to git root
+    local filepath = vim.fn.expand('%:p')
+
+    -- Check if file exists
+    if filepath == '' then
+        vim.notify('No file is currently open', vim.log.levels.WARN)
+        return
+    end
+
+    -- Get git root directory
+    local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+    if vim.v.shell_error ~= 0 then
+        vim.notify('Not in a git repository', vim.log.levels.ERROR)
+        return
+    end
+
+    -- Get relative path from git root
+    local relative_path = filepath:sub(#git_root + 2) -- +2 to skip the trailing slash
+
+    -- Get the remote URL for origin
+    local remote_url = vim.fn.systemlist('git remote get-url origin')[1]
+    if vim.v.shell_error ~= 0 then
+        vim.notify('No origin remote found', vim.log.levels.ERROR)
+        return
+    end
+
+    -- Get default branch
+    local default_branch = vim.fn.systemlist('git symbolic-ref refs/remotes/origin/HEAD')[1]
+    if vim.v.shell_error ~= 0 then
+        -- Fallback: try to get default branch from remote
+        default_branch = vim.fn.systemlist('git remote show origin | grep "HEAD branch" | cut -d" " -f5')[1]
+        if vim.v.shell_error ~= 0 then
+            vim.notify('Could not determine default branch, using "main"', vim.log.levels.WARN)
+            default_branch = 'main'
+        end
+    else
+        -- Extract branch name from refs/remotes/origin/HEAD
+        default_branch = default_branch:match('refs/remotes/origin/(.+)')
+    end
+
+    -- Convert git URL to GitHub web URL
+    local github_url = remote_url
+        :gsub('git@github%.com:', 'https://github.com/')
+        :gsub('%.git$', '')
+        :gsub('^https://github%.com/', 'https://github.com/')
+
+    -- Construct the full URL
+    local full_url = string.format('%s/blob/%s/%s', github_url, default_branch, relative_path)
+
+    -- Open in browser
+    vim.fn.system(string.format('xdg-open "%s"', full_url))
+end
+
+-- Create a command
+vim.api.nvim_create_user_command('GithubOpen', open_in_github, {})
+
+-- Create a keymap (example: <leader>gh)
+vim.keymap.set('n', '<leader>gh', open_in_github, { desc = 'Open file in GitHub' })

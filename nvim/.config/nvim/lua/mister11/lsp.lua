@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         Nmap('gD', vim.lsp.buf.declaration, { buf = args.buf })
         Nmap('gd', "<cmd>FzfLua lsp_definitions<cr>", { buf = args.buf })
-        Nmap('gr', "<cmd>FzfLua lsp_references<cr>", { buf = args.buf })
+        Nmap('gr', function() require("fzf-lua").lsp_references({ includeDeclaration = false }) end, { buf = args.buf })
         Nmap('gs', "<cmd>FzfLua lsp_document_symbols<cr>", { buf = args.buf })
         Nmap('K', vim.lsp.buf.hover, { buf = args.buf })
         Nmap('<leader>li', vim.lsp.buf.implementation, { buf = args.buf })

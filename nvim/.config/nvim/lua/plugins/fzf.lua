@@ -20,5 +20,22 @@ return {
         { "<leader>fv", "<cmd>FzfLua grep_visual<cr>", mode = 'x', desc = "Live Grep" },
         { "<leader>fr", "<cmd>FzfLua resume<cr>", desc = "Live Grep" },
         { "<leader>fh", "<cmd>FzfLua helptags<cr>", desc = "Live Grep" },
-    }
+    },
+    config = function()
+        require("fzf-lua").setup({
+            files = {
+                hidden = true,
+            },
+            grep = {
+                hidden = true
+            },
+            keymap = {
+                fzf = {
+                    true,
+                    -- Use <c-q> to select all items and add them to the quickfix list
+                    ["ctrl-q"] = "select-all+accept",
+                },
+            },
+        })
+    end
 }

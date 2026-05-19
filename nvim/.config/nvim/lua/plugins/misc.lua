@@ -14,6 +14,8 @@ return {
         config = true
     },
 
+    { 'echasnovski/mini.surround', version = '*', config = true },
+
     {
         "windwp/nvim-ts-autotag",
         opts = {
@@ -30,4 +32,10 @@ return {
             { '<leader>sr', '<cmd>GrugFar<cr>' }
         }
     },
+
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        opts = {},
+    }
 }
