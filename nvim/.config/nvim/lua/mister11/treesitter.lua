@@ -7,16 +7,21 @@ local treesitter = require('nvim-treesitter')
 local ensure_installed = {
     'bash',
     'elixir',
+    'erlang',
+    'gitcommit',
     'go',
     'html',
+    'javascript',
     'json',
     'kotlin',
     'lua',
+    'properties',
     'sql',
     'terraform',
     'typescript',
     'vue',
-    'yaml'
+    'yaml',
+    'zsh'
 }
 
 local already_installed = treesitter.get_installed()

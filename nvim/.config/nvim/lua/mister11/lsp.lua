@@ -11,6 +11,7 @@ require('mason-lspconfig').setup({
     automatic_enable = false,
     ensure_installed = {
         'bashls',
+        'dexter',
         'gopls',
         'html',
         'jsonls',
@@ -38,7 +39,8 @@ vim.lsp.enable(lspNames)
 --
 
 -- enable custom built LSPs
-vim.lsp.enable('lexical')
+-- vim.lsp.enable('lexical')
+-- vim.lsp.enable('expert')
 vim.lsp.enable('kotlin_lsp')
 --
 
