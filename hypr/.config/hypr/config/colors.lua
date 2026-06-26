@@ -1,0 +1,19 @@
+-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+-- ┃                      Colors Configuration                   ┃
+-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+--
+-- Was colors.conf ($cachy* substitution variables). Now a table module:
+--   local colors = require("config.colors")
+--   ... col = { active_border = colors.cachylblue }
+
+return {
+    cachylgreen = "rgba(82dcccff)",
+    cachymgreen = "rgba(00aa84ff)",
+    cachydgreen = "rgba(007d6fff)",
+    cachylblue  = "rgba(01ccffff)",
+    cachymblue  = "rgba(182545ff)",
+    cachydblue  = "rgba(111826ff)",
+    cachywhite  = "rgba(ffffffff)",
+    cachygrey   = "rgba(ddddddff)",
+    cachygray   = "rgba(798bb2ff)",
+}

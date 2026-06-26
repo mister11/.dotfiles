@@ -1,0 +1,9 @@
+-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+-- ┃                    Workspaces Configuration                 ┃
+-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+--
+-- Empty, like the original workspaces.conf (and, like it, not required by
+-- hyprland.lua). Add workspace rules here when needed, e.g.:
+--
+-- hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
+-- hl.workspace_rule({ workspace = "special:scratchpad", on_created_empty = "kitty" })
