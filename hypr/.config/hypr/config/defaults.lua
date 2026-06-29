@@ -1,11 +1,7 @@
--- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
--- ┃                     Default Variables                         ┃
--- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
 return {
     filemanager = "thunar",
     applauncher = "rofi -show drun -display-drun",
     terminal    = "kitty",
-    idlehandler = "swayidle -w timeout 300 'swaylock -f -c 000000' before-sleep 'swaylock -f -c 000000'",
     capturing   = 'grim -g "$(slurp)" - | swappy -f -',
+    mainMod     = "SUPER",
 }

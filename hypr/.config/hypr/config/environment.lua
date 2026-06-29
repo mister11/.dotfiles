@@ -1,19 +1,7 @@
--- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
--- ┃                  Environment Variables Setup                  ┃
--- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
--- envd semantics: only set if currently unset
-local default_envs = {
-    HYPRCURSOR_SIZE = "24",
-    XCURSOR_SIZE    = "24",
-    QT_CURSOR_SIZE  = "24",
-}
-
-for name, value in pairs(default_envs) do
-    if os.getenv(name) == nil then
-        hl.env(name, value)
-    end
-end
+-- send to D-bus activation env
+hl.env("HYPRCURSOR_SIZE", "24", true)
+hl.env("XCURSOR_SIZE", "24", true)
+hl.env("QT_CURSOR_SIZE", "24", true)
 
 hl.env("QT_QPA_PLATFORMTHEME",             "qt6ct")
 hl.env("QT_QPA_PLATFORM",                  "wayland")

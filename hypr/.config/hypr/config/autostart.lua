@@ -1,9 +1,3 @@
--- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
--- ┃                      Autostart Commands                       ┃
--- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-local defaults = require("config.defaults")
-
 hl.on("hyprland.start", function()
     hl.exec_cmd("swaybg -o \\* -i $(find ~/Pictures/wallpapers/. -type f | shuf -n1) -m fill")
     hl.exec_cmd("waybar")
@@ -15,6 +9,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user import-environment")
     hl.exec_cmd("hash dbus-update-activation-environment 2>/dev/null")
     hl.exec_cmd("dbus-update-activation-environment --systemd")
-    hl.exec_cmd(defaults.idlehandler)
+    hl.exec_cmd("hypridle")
     hl.exec_cmd("megasync")
 end)
