@@ -16,6 +16,7 @@ local ensure_installed = {
     'kotlin',
     'lua',
     'properties',
+    'python',
     'sql',
     'terraform',
     'typescript',
