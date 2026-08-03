@@ -17,6 +17,7 @@ local ensure_installed = {
     'lua',
     'properties',
     'python',
+    'rust',
     'sql',
     'terraform',
     'typescript',
