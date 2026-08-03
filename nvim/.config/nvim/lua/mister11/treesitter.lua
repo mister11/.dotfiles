@@ -6,6 +6,7 @@ local treesitter = require('nvim-treesitter')
 
 local ensure_installed = {
     'bash',
+    'dockerfile',
     'elixir',
     'erlang',
     'gitcommit',
@@ -20,6 +21,7 @@ local ensure_installed = {
     'rust',
     'sql',
     'terraform',
+    'tsx',
     'typescript',
     'vue',
     'yaml',
