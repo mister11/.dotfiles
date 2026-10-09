@@ -44,6 +44,8 @@ vim.lsp.enable('expert')
 vim.lsp.enable('kotlin_lsp')
 --
 
+vim.lsp.enable('gleam')
+
 vim.diagnostic.config({ virtual_text = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {

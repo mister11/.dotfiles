@@ -170,6 +170,13 @@ autocmd({ "BufNewFile", "BufRead" }, {
 })
 autocmd({ "BufNewFile", "BufRead" }, {
     group = filetype_group,
+    pattern = "*.exs.eex",
+    callback = function()
+        vim.bo.filetype = "elixir"
+    end,
+})
+autocmd({ "BufNewFile", "BufRead" }, {
+    group = filetype_group,
     pattern = "*.env",
     callback = function()
         vim.bo.filetype = "jproperties"

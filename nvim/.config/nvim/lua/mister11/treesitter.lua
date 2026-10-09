@@ -10,6 +10,8 @@ local ensure_installed = {
     'elixir',
     'erlang',
     'gitcommit',
+    'gitignore',
+    'gleam',
     'go',
     'html',
     'javascript',
